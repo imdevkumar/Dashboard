@@ -4,6 +4,8 @@ function App() {
   return (
     <>
     <SidebarWithDropdowns/>  
+    <h1>hello
+    </h1>
     </>
   )
 }
