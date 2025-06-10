@@ -20,6 +20,9 @@ const SubHeader = () => {
   const [competitorBrand, setCompetitorBrand] = useState(brands[1].value);
   const [selectedKpis, setSelectedKpis] = useState(['awareness', 'consideration']);
 
+  // For KPI dropdown: show 'N Selected' as the only visible option
+  const kpiSelectedLabel = `${selectedKpis.length} Selected`;
+
   return (
     <div className="sub-header-container">
       {/* Row 1: Tabs and Button */}
@@ -78,16 +81,16 @@ const SubHeader = () => {
         <div className="sub-header-dropdown flex-grow-1 select-chevron-wrapper">
           <label>KPI</label>
           <select
-            multiple
-            value={selectedKpis}
-            onChange={e => setSelectedKpis(Array.from(e.target.selectedOptions, option => option.value))}
+            value={kpiSelectedLabel}
+            onChange={e => {
+              // This disables direct selection, but keeps the label visible
+            }}
+            style={{ color: '#222', fontWeight: 500 }}
+            disabled
           >
-            {kpis.map(k => (
-              <option key={k.value} value={k.value}>{k.label}</option>
-            ))}
+            <option value={kpiSelectedLabel}>{kpiSelectedLabel}</option>
           </select>
           <span className="dropdown-chevron">▼</span>
-          <span className="kpi-selected">{selectedKpis.length} Selected</span>
         </div>
       </div>
     </div>

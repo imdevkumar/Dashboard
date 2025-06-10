@@ -1,9 +1,30 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import './AwarenessMatrix.css';
 
 const AwarenessMatrix = () => {
+  const [progress, setProgress] = useState({
+    burgerKing: 0,
+    kfc: 0
+  });
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setProgress({
+        burgerKing: 75,
+        kfc: 45
+      });
+    }, 100); // Delay to trigger animation after mount
+
+    return () => clearTimeout(timer);
+  }, []);
+
   return (
-    <div className="awareness-matrix-container"> 
+    <div className="awareness-matrix-container" style={{backgroundColor: '#dbdbdb', padding: '20px'}}> 
+  <div className='d-flex justify-content-between align-items-center'>
+      <h4>Spontaneous Awareness (TOM)</h4>
+      <h4>Overall</h4>
+  </div>
+
       <div className="d-flex flex-wrap justify-content-between align-items-stretch">
         {/* Burger King Card */}
         <div className="awareness-card flex-fill">
@@ -13,14 +34,21 @@ const AwarenessMatrix = () => {
             <span className="ms-auto percent-value">75%</span>
           </div>
           <div className="progress awareness-progress mb-1">
-            <div className="progress-bar bg-success" style={{ width: '75%' }}></div>
-            <div className="progress-bar bg-light" style={{ width: '25%' }}></div>
+            <div
+              className="progress-bar bg-success"
+              style={{ width: `${progress.burgerKing}%` }}
+            ></div>
+            <div
+              className="progress-bar bg-light"
+              style={{ width: `${100 - progress.burgerKing}%` }}
+            ></div>
           </div>
           <div className="d-flex justify-content-between small-text">
             <span>Base: 1143</span>
             <span className="text-muted">72%</span>
           </div>
         </div>
+
         {/* KFC Card */}
         <div className="awareness-card flex-fill">
           <div className="d-flex align-items-center mb-2">
@@ -29,8 +57,14 @@ const AwarenessMatrix = () => {
             <span className="ms-auto percent-value">45%</span>
           </div>
           <div className="progress awareness-progress mb-1">
-            <div className="progress-bar bg-secondary" style={{ width: '45%' }}></div>
-            <div className="progress-bar bg-light" style={{ width: '55%' }}></div>
+            <div
+              className="progress-bar bg-secondary"
+              style={{ width: `${progress.kfc}%` }}
+            ></div>
+            <div
+              className="progress-bar bg-light"
+              style={{ width: `${100 - progress.kfc}%` }}
+            ></div>
           </div>
           <div className="d-flex justify-content-between small-text">
             <span>Base: 1143</span>
@@ -42,4 +76,4 @@ const AwarenessMatrix = () => {
   );
 };
 
-export default AwarenessMatrix; 
+export default AwarenessMatrix;

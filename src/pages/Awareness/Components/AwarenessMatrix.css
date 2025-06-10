@@ -53,7 +53,7 @@
 }
 
 .awareness-progress {
-  height: 18px;
+  height: 45px;
   
   overflow: hidden;
   background: #f5f5f5;
@@ -103,3 +103,9 @@
     font-size: 1rem;
   }
 } 
+
+
+
+.progress-bar {
+  transition: width 1.2s ease-in-out;
+}

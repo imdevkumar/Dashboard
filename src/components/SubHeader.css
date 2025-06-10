@@ -93,8 +93,8 @@
 
 .dropdown-logo {
   position: absolute;
-  left: 6px;
-  top: 28px;
+  left: 18px;
+  top: 42px;
   width: 24px;
   height: 24px;
   border-radius: 50%;
@@ -148,8 +148,8 @@
 
 .dropdown-chevron {
   position: absolute;
-  right: 12px;
-  top: 50%;
+  right: 25px;
+  top: 65%;
   transform: translateY(-50%);
   pointer-events: none;
   font-size: 1.1rem;
