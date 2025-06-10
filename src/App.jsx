@@ -1,39 +1,39 @@
-import { Routes, Route } from "react-router-dom";
-import Header from "./components/Header";
-import LeftSidebar from "./components/LeftSidebar";
-import Overview from "./pages/Overview";
-import Awareness from "./pages/Awareness";
-import Consideration from "./pages/Consideration"
-import Visitation from "./pages/Visitation";
-import Product from "./pages/Product";
-import Communication from "./pages/Communication";
+import React from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import Header from './components/Header';
+import LeftSidebar from './components/LeftSidebar';
+import Overview from './pages/Overview/Overview';
+import Communication from './pages/Communication/Communication';
+import Product from './pages/Product/Product';
+import Visitation from './pages/Visitation/Visitation';
+import Consideration from './pages/Consideration/Consideration';
+import Awareness from './pages/Awareness/Awareness';
+import Profile from './pages/Profile/Profile';
+import './App.css';
+import SubHeader from './components/SubHeader';
 
 function App() {
   return (
-    <div className="app-container">
-      <Header />
-      <LeftSidebar />
-      <div className="main-content" style={{ 
-        marginLeft: '280px',
-        paddingTop: '80px',
-        padding: '20px',
-        minHeight: 'calc(100vh - 80px)',
-        backgroundColor: '#f8f9fa',
-        transition: 'margin-left 0.3s ease',
-        '@media (max-width: 768px)': {
-          marginLeft: 0
-        }
-      }}>
-        <Routes>
-          <Route path="/" element={<Overview />} />
-          <Route path="/awareness" element={<Awareness />} />
-          <Route path="/consideration" element={<Consideration />} />
-          <Route path="/visitation" element={<Visitation />} />
-          <Route path="/product" element={<Product />} />
-          <Route path="/communication" element={<Communication />} />
-        </Routes>
+    <Router>
+      <div className="app">
+        <Header />
+        <div className="main-content">
+          <LeftSidebar />
+          <div className="content-wrapper">
+          <SubHeader/>
+            <Routes>
+              <Route path="/" element={<Overview />} />
+              <Route path="/communication" element={<Communication />} />
+              <Route path="/product" element={<Product />} />
+              <Route path="/visitation" element={<Visitation />} />
+              <Route path="/consideration" element={<Consideration />} />
+              <Route path="/awareness" element={<Awareness />} />
+              <Route path="/profile" element={<Profile />} />
+            </Routes>
+          </div>
+        </div>
       </div>
-    </div>
+    </Router>
   );
 }
 

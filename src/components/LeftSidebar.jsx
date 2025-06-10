@@ -1,6 +1,35 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 
+// Floating label select component
+const FloatingSelect = ({ label, name, value, options, onChange }) => (
+  <div className="mb-3 position-relative" style={{ width: '250px' }}>
+    <label
+      className="position-absolute bg-white px-1"
+      style={{
+        top: '-8px',
+        left: '12px',
+        fontSize: '15px',
+        zIndex: 1
+      }}
+    >
+      {label}
+    </label>
+    <select
+      className="form-select"
+      style={{ paddingTop: '10px', paddingBottom: '10px', paddingLeft: '12px' }}
+      value={value}
+      onChange={(e) => onChange(name, e.target.value)}
+    >
+      {options.map((opt) => (
+        <option key={opt.value} value={opt.value}>
+          {opt.label}
+        </option>
+      ))}
+    </select>
+  </div>
+);
+
 const LeftSidebar = () => {
   const [filters, setFilters] = useState({
     dateRange: '',
@@ -11,6 +40,7 @@ const LeftSidebar = () => {
     location: '',
     tags: [],
     assignedTo: '',
+    product: '',
     customDate: {
       start: '',
       end: ''
@@ -18,7 +48,7 @@ const LeftSidebar = () => {
   });
 
   const handleFilterChange = (filterType, value) => {
-    setFilters(prev => ({
+    setFilters((prev) => ({
       ...prev,
       [filterType]: value
     }));
@@ -34,6 +64,7 @@ const LeftSidebar = () => {
       location: '',
       tags: [],
       assignedTo: '',
+      product: '',
       customDate: {
         start: '',
         end: ''
@@ -46,182 +77,167 @@ const LeftSidebar = () => {
   };
 
   return (
-    <div className="left-sidebar bg-white" style={{
-      width: '280px',
-      height: '100vh',
-      position: 'fixed',
-      left: 0,
-      top: 0,
-      borderRight: '1px solid #e0e0e0',
-      paddingTop: '80px',
-      display: 'flex',
-      flexDirection: 'column',
-      '@media (max-width: 768px)': {
-        transform: 'translateX(-100%)',
-        '&.open': {
-          transform: 'translateX(0)'
-        }
-      }
-    }}>
-      {/* Fixed Filters Header */}
-      <div className="filters-header" style={{
-        position: 'fixed',
-        top: '80px',
-        left: 0,
-        width: '280px',
-        padding: '15px 20px',
-        backgroundColor: 'white',
-        borderBottom: '1px solid #e0e0e0',
-        zIndex: 1
-      }}>
-        <h5 className="mb-0">Filters</h5>
-      </div>
-
-      {/* Scrollable Filters Section */}
-      <div className="filters-container" style={{
-        flex: 1,
-        overflowY: 'auto',
-        padding: '20px',
-        paddingTop: '60px', // Space for fixed header
-        paddingBottom: '100px' // Space for fixed buttons
-      }}>
-        {/* Date Range Filter */}
-        <div className="mb-4">
-          <h6 className="mb-2">Date Range</h6>
-          <select 
-            className="form-select mb-2"
-            value={filters.dateRange}
-            onChange={(e) => handleFilterChange('dateRange', e.target.value)}
-          >
-            <option value="">Select Date Range</option>
-            <option value="7">Last 7 days</option>
-            <option value="30">Last 30 days</option>
-            <option value="90">Last 90 days</option>
-            <option value="custom">Custom Range</option>
-          </select>
-          {filters.dateRange === 'custom' && (
-            <div className="d-flex gap-2">
-              <input type="date" className="form-control" 
-                value={filters.customDate.start}
-                onChange={(e) => handleFilterChange('customDate', {...filters.customDate, start: e.target.value})}
-              />
-              <input type="date" className="form-control"
-                value={filters.customDate.end}
-                onChange={(e) => handleFilterChange('customDate', {...filters.customDate, end: e.target.value})}
-              />
-            </div>
-          )}
-        </div>
-
-        {/* Status Filter */}
-        <div className="mb-4">
-          <h6 className="mb-2">Status</h6>
-          <select 
-            className="form-select"
-            value={filters.status}
-            onChange={(e) => handleFilterChange('status', e.target.value)}
-          >
-            <option value="">All Status</option>
-            <option value="active">Active</option>
-            <option value="inactive">Inactive</option>
-            <option value="pending">Pending</option>
-            <option value="completed">Completed</option>
-          </select>
-        </div>
-
-        {/* Priority Filter */}
-        <div className="mb-4">
-          <h6 className="mb-2">Priority</h6>
-          <select 
-            className="form-select"
-            value={filters.priority}
-            onChange={(e) => handleFilterChange('priority', e.target.value)}
-          >
-            <option value="">All Priorities</option>
-            <option value="high">High</option>
-            <option value="medium">Medium</option>
-            <option value="low">Low</option>
-          </select>
-        </div>
-
-        {/* Location Filter */}
-        <div className="mb-4">
-          <h6 className="mb-2">Location</h6>
-          <select 
-            className="form-select"
-            value={filters.location}
-            onChange={(e) => handleFilterChange('location', e.target.value)}
-          >
-            <option value="">All Locations</option>
-            <option value="location1">Location 1</option>
-            <option value="location2">Location 2</option>
-            <option value="location3">Location 3</option>
-          </select>
-        </div>
-
-        {/* Assigned To Filter */}
-        <div className="mb-4">
-          <h6 className="mb-2">Assigned To</h6>
-          <select 
-            className="form-select"
-            value={filters.assignedTo}
-            onChange={(e) => handleFilterChange('assignedTo', e.target.value)}
-          >
-            <option value="">All Users</option>
-            <option value="user1">User 1</option>
-            <option value="user2">User 2</option>
-            <option value="user3">User 3</option>
-          </select>
-        </div>
-      </div>
-
-      {/* Fixed Buttons at Bottom */}
-      <div className="filter-buttons" style={{
-        position: 'fixed',
-        bottom: 0,
-        left: 0,
-        width: '280px',
-        padding: '15px',
-        backgroundColor: 'white',
-        borderTop: '1px solid #e0e0e0',
-        display: 'flex',
-        gap: '10px',
-        zIndex: 1
-      }}>
-        <button 
-          className="btn btn-outline-secondary flex-grow-1"
-          onClick={handleReset}
-        >
-          Reset Filters
-        </button>
-        <button 
-          className="btn btn-primary flex-grow-1"
-          onClick={handleApply}
-        >
-          Apply Filters
-        </button>
-      </div>
-
-      {/* Mobile Toggle Button */}
-      <button 
+    <>
+      {/* Mobile Filter Toggle Button - Fixed */}
+      <button
         className="d-md-none btn btn-primary position-fixed"
         style={{
-          bottom: '20px',
-          right: '20px',
+          top: '10px',
+          left: '20px',
           zIndex: 1001,
           borderRadius: '50%',
-          width: '50px',
-          height: '50px',
+          width: '40px',
+          height: '40px',
           display: 'flex',
           alignItems: 'center',
-          justifyContent: 'center'
+          justifyContent: 'center',
+          boxShadow: '0 2px 5px rgba(0,0,0,0.2)'
         }}
         onClick={() => document.querySelector('.left-sidebar').classList.toggle('open')}
       >
         <i className="fas fa-filter"></i>
       </button>
-    </div>
+
+      {/* Sidebar */}
+      <div
+        className="left-sidebar bg-white"
+        style={{
+          width: '280px',
+          height: '100vh',
+          position: 'fixed',
+          left: 0,
+          top: 0,
+          borderRight: '1px solid #e0e0e0',
+          paddingTop: '80px',
+          display: 'flex',
+          flexDirection: 'column'
+        }}
+      >
+        {/* Filters Header */}
+        <div
+          className="filters-header"
+          style={{
+            position: 'sticky',
+            top: '80px',
+            left: 0,
+            width: '280px',
+            padding: '0px 20px',
+            backgroundColor: 'white',
+            borderBottom: '1px solid #e0e0e0',
+            zIndex: 1
+          }}
+        >
+          
+          <FloatingSelect
+            label="Priority"
+            name="priority"
+            value={filters.priority}
+            onChange={handleFilterChange}
+            options={[
+              { value: '', label: 'All Priorities' },
+              { value: 'high', label: 'High' },
+              { value: 'medium', label: 'Medium' },
+              { value: 'low', label: 'Low' }
+            ]}
+          />
+        </div>
+
+        {/* Scrollable Filters */}
+        <div
+          className="filters-container"
+          style={{
+            flex: 1,
+            overflowY: 'auto',
+            padding: '20px',
+            paddingTop: '10px',
+            paddingBottom: '20px'
+          }}
+        >
+          {/* All Dropdown Filters with Floating Labels */}
+          <FloatingSelect
+            label="Product"
+            name="product"
+            value={filters.product}
+            onChange={handleFilterChange}
+            options={[
+              { value: '', label: 'Select Product' },
+              { value: 'product1', label: 'Product 1' },
+              { value: 'product2', label: 'Product 2' }
+            ]}
+          />
+
+          <FloatingSelect
+            label="Priority"
+            name="priority"
+            value={filters.priority}
+            onChange={handleFilterChange}
+            options={[
+              { value: '', label: 'All Priorities' },
+              { value: 'high', label: 'High' },
+              { value: 'medium', label: 'Medium' },
+              { value: 'low', label: 'Low' }
+            ]}
+          />
+
+          <FloatingSelect
+            label="Location"
+            name="location"
+            value={filters.location}
+            onChange={handleFilterChange}
+            options={[
+              { value: '', label: 'All Locations' },
+              { value: 'location1', label: 'Location 1' },
+              { value: 'location2', label: 'Location 2' },
+              { value: 'location3', label: 'Location 3' }
+            ]}
+          />
+
+          <FloatingSelect
+            label="Assigned To"
+            name="assignedTo"
+            value={filters.assignedTo}
+            onChange={handleFilterChange}
+            options={[
+              { value: '', label: 'All Users' },
+              { value: 'user1', label: 'User 1' },
+              { value: 'user2', label: 'User 2' },
+              { value: 'user3', label: 'User 3' }
+            ]}
+          />
+        </div>
+
+        {/* Fixed Action Buttons */}
+        <div
+          className="filter-buttons"
+          style={{
+            position: 'fixed',
+            bottom: 0,
+            left: 0,
+            width: '280px',
+            padding: '15px',
+            backgroundColor: 'white',
+            borderTop: '1px solid #e0e0e0',
+            display: 'flex',
+            gap: '10px',
+            zIndex: 1
+          }}
+        >
+          <button
+            className="btn btn-outline-secondary flex-grow-1"
+            onClick={handleReset}
+          >
+            Reset Filters
+          </button>
+          <button
+            className="btn btn-primary flex-grow-1"
+            onClick={handleApply}
+          >
+            Apply Filters
+          </button>
+        </div>
+      </div>
+    </>
   );
 };
 
-export default LeftSidebar; 
+export default LeftSidebar;

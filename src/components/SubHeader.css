@@ -1,0 +1,231 @@
+.sub-header-container {
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+  padding: 50px 18px 10px 18px;
+  margin-bottom: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.sub-header-row {
+  width: 100%;
+  display: flex;
+  align-items: flex-end;
+}
+
+.sub-header-tabs-row {
+  margin-bottom: 8px;
+  justify-content: space-between;
+}
+
+.sub-header-tabs {
+  display: flex;
+  gap: 4px;
+}
+
+.sub-header-segment-btn-wrapper {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+}
+
+.sub-header-tab {
+  background: #fff;
+  border: 1.5px solid #bdbdbd;
+  border-radius: 6px 6px 0 0;
+  padding: 6px 18px;
+  font-weight: 500;
+  font-size: 1rem;
+  color: #222;
+  cursor: pointer;
+  outline: none;
+  margin-right: 2px;
+  transition: background 0.2s, border 0.2s;
+}
+
+.sub-header-tab.active {
+  background: #eaf7ed;
+  border: 2px solid #1a7f37;
+  color: #1a7f37;
+  font-weight: 600;
+}
+
+.sub-header-filters-row {
+  justify-content: flex-end;
+}
+
+.sub-header-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 18px;
+  align-items: flex-end;
+  flex: 1 1 0;
+  min-width: 0;
+  justify-content: flex-end;
+}
+
+.sub-header-dropdown {
+  display: flex;
+  flex-direction: column;
+  min-width: 180px;
+  position: relative;
+  padding: 10px;
+}
+
+.sub-header-dropdown label {
+  font-size: 0.95rem;
+  color: #888;
+  margin-bottom: 2px;
+}
+
+.sub-header-dropdown select {
+  padding: 6px 32px 6px 36px;
+  border-radius: 6px;
+  border: 1.5px solid #bdbdbd;
+  font-size: 1rem;
+  background: #fff;
+  appearance: none;
+  outline: none;
+  font-weight: 500;
+}
+
+.dropdown-logo {
+  position: absolute;
+  left: 6px;
+  top: 28px;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  object-fit: contain;
+  background: #fff;
+  border: 1px solid #eee;
+  pointer-events: none;
+}
+
+.kpi-selected {
+  position: absolute;
+  right: 10px;
+  top: 28px;
+  font-size: 0.95rem;
+  color: #888;
+  background: #fff;
+  padding-left: 6px;
+}
+
+.sub-header-segment-btn {
+  background: #fff;
+  border: 1.5px solid #bdbdbd;
+  border-radius: 6px;
+  padding: 6px 18px;
+  font-weight: 500;
+  font-size: 1rem;
+  color: #222;
+  cursor: pointer;
+  outline: none;
+  margin-left: 8px;
+  transition: background 0.2s, border 0.2s;
+}
+
+.sub-header-segment-btn:hover {
+  background: #f5f5f5;
+  border-color: #1a7f37;
+  color: #1a7f37;
+}
+
+.select-chevron-wrapper {
+  position: relative;
+}
+
+.select-chevron-wrapper select {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background: #fff;
+  padding-right: 32px !important;
+}
+
+.dropdown-chevron {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none;
+  font-size: 1.1rem;
+  color: #888;
+  z-index: 2;
+}
+
+@media (max-width: 900px) {
+  .sub-header-container {
+    padding: 12px 6px 8px 6px;
+  }
+  .sub-header-row {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0;
+  }
+  .sub-header-tabs-row {
+    margin-bottom: 6px;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .sub-header-segment-btn-wrapper {
+    margin-left: 0;
+    margin-top: 8px;
+    justify-content: flex-end;
+  }
+  .sub-header-filters-row {
+    margin-bottom: 0;
+  }
+  .sub-header-filters {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 10px;
+  }
+  .sub-header-dropdown {
+    min-width: 0;
+  }
+}
+
+@media (max-width: 600px) {
+  .sub-header-container {
+    padding: 8px 2px 4px 2px;
+    gap: 0;
+  }
+  .sub-header-tabs-row {
+    margin-bottom: 4px;
+  }
+  .sub-header-tabs {
+    gap: 2px;
+  }
+  .sub-header-tab {
+    padding: 4px 10px;
+    font-size: 0.95rem;
+  }
+  .sub-header-filters {
+    gap: 6px;
+  }
+  .sub-header-dropdown select {
+    font-size: 0.95rem;
+    padding: 5px 28px 5px 30px;
+  }
+  .dropdown-logo {
+    width: 18px;
+    height: 18px;
+    top: 22px;
+    left: 4px;
+  }
+  .kpi-selected {
+    font-size: 0.9rem;
+    right: 6px;
+    top: 22px;
+  }
+  .sub-header-segment-btn {
+    padding: 4px 10px;
+    font-size: 0.95rem;
+    margin-left: 0;
+  }
+} 
