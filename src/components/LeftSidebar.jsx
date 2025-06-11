@@ -224,11 +224,12 @@ const LeftSidebar = () => {
           <button
             className="btn btn-outline-secondary flex-grow-1"
             onClick={handleReset}
+            // style={{fontSize:'15px'}}
           >
             Reset Filters
           </button>
           <button
-            className="btn btn-primary flex-grow-1"
+            className="btn btn-dark flex-grow-1"
             onClick={handleApply}
           >
             Apply Filters
