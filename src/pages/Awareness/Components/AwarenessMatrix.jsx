@@ -16,11 +16,11 @@ const AwarenessMatrix = () => {
     }, 100); // Delay to trigger animation after mount
 
     return () => clearTimeout(timer);
-  }, []);
+  }, []); 
 
   return (
     <div className="awareness-matrix-container" > 
-     <h4 className='text-center pb-2 border-bottom border-dark mb-3'>Overall</h4>
+     <h5 className='text-center pb-2 border-bottom border-dark mb-3'>Overall</h5>
    <div style={{backgroundColor: '#dbdbdb', padding: '20px'}}>
     <h4>Spontaneous Awareness (TOM)</h4>
     <div className="d-flex flex-wrap justify-content-between align-items-stretch">

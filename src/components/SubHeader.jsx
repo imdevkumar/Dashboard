@@ -139,7 +139,7 @@ const BrandSingleValue = (props) => (
   </components.SingleValue>
 );
 
-const SubHeader = ({ activeTab, setActiveTab, onOpenSegment }) => {
+const SubHeader = ({ activeTab, setActiveTab, onOpenSegment, showSidebar }) => {
   const [coreBrand, setCoreBrand] = React.useState(brands[0]);
   const [competitorBrand, setCompetitorBrand] = React.useState(brands[1]);
   const [selectedKpis, setSelectedKpis] = React.useState([kpis[0], kpis[1]]);
@@ -215,7 +215,7 @@ const SubHeader = ({ activeTab, setActiveTab, onOpenSegment }) => {
             className="sub-header-segment-btn"
             onClick={typeof onOpenSegment === 'function' ? onOpenSegment : undefined}
           >
-            Open Segment
+            {showSidebar ? 'Close Segment' : 'Open Segment'}
           </button>
         </div>
       </div>
