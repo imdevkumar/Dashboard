@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import { getTabDetails } from '../api/dashboardService';
 
 // Floating label select component
 const FloatingSelect = ({ label, name, value, options, onChange }) => (
@@ -46,6 +47,26 @@ const LeftSidebar = () => {
       end: ''
     }
   });
+
+  const [markets, setMarkets] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchMarkets = async () => {
+      try {
+        const data = await getTabDetails('evhq5wczbiu', 'yegniuz2vsw');
+        if (data && data.markets) {
+          setMarkets(data.markets);
+        }
+      } catch (error) {
+        console.error('Error fetching markets:', error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchMarkets();
+  }, []);
 
   const handleFilterChange = (filterType, value) => {
     setFilters((prev) => ({
@@ -154,14 +175,16 @@ const LeftSidebar = () => {
         >
           {/* All Dropdown Filters with Floating Labels */}
           <FloatingSelect
-            label="Product"
+            label="Markets"
             name="product"
             value={filters.product}
             onChange={handleFilterChange}
             options={[
-              { value: '', label: 'Select Product' },
-              { value: 'product1', label: 'Product 1' },
-              { value: 'product2', label: 'Product 2' }
+              { value: '', label: 'Select Market' },
+              ...markets.map(market => ({
+                value: market.market_id.toString(),
+                label: market.market_label
+              }))
             ]}
           />
 

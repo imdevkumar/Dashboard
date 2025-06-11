@@ -4,7 +4,7 @@ export async function loginUser(email, password) {
   form.append("password", password);
 
   const response = await fetch("https://api.pvaluedashboard.com/api/login", {
-    method: "POST",
+    method: "POST",   
     body: form,
   });
 
