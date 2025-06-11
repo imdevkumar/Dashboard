@@ -1,0 +1,50 @@
+.overview-container {
+  min-height: 100vh;
+  background-color: #f5f5f5;
+}
+
+.overview-header {
+  background-color: white;
+  padding: 1rem 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.overview-header h1 {
+  margin: 0;
+  color: #333;
+  font-size: 1.5rem;
+}
+
+.logout-button {
+  background-color: #ff4d4f;
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: background-color 0.2s ease;
+}
+
+.logout-button:hover {
+  background-color: #ff7875;
+}
+
+.overview-content {
+  padding: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.overview-content h2 {
+  color: #333;
+  margin-bottom: 1rem;
+}
+
+.overview-content p {
+  color: #666;
+  font-size: 1.1rem;
+} 

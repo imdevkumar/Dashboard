@@ -1,0 +1,228 @@
+html, body {
+  margin: 0;
+  padding: 0;
+  
+}
+
+.loginbg {
+  background: url('/login-bg.jpeg'), #f8fdff;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  min-height: 100vh;
+  width: 100vw;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  align-items: center; /* Center vertically */
+  justify-content: flex-start; /* Align form to the left */
+  box-sizing: border-box; /* Ensure padding/margins are included in width */
+}
+
+.login-container, .login-box {
+  pointer-events: auto;
+  box-sizing: border-box;
+}
+
+.login-logo {
+  margin-left: 80px;
+  margin-bottom: 24px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.login-logo img {
+  height: 28px;
+  width: auto;
+  max-width: 100%; /* Ensure logo doesn't overflow */
+}
+
+.login-box {
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+  padding: 2.5rem;
+  width: 350px;
+  max-width: 90%; /* Prevent overflow on smaller screens */
+  margin-left: 80px;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  position: relative;
+  z-index: 2;
+}
+
+.login-box h1 {
+  margin: 0 0 0.5rem;
+  color: #111;
+  font-size: 2rem;
+  font-weight: 700;
+}
+
+.login-box .subtitle {
+  color: #c1121f;
+  margin-bottom: 1.5rem;
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+.login-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  position: relative;
+}
+
+.form-group input {
+  padding: 0.75rem 2.5rem 0.75rem 2.5rem;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  font-size: 1rem;
+  transition: border-color 0.2s ease;
+  background: #fafbfc;
+  width: 100%; /* Ensure inputs take full width */
+  box-sizing: border-box;
+}
+
+.form-group input:focus {
+  outline: none;
+  border-color: #c1121f;
+  background: #fff;
+}
+
+.form-group .input-icon {
+  position: absolute;
+  left: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #bdbdbd;
+  font-size: 1.1rem;
+}
+
+.login-options {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 0.95rem;
+  color: #888;
+  margin-bottom: 0.5rem;
+  flex-wrap: wrap; /* Allow wrapping on small screens */
+}
+
+.login-options label {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+}
+
+.login-options a {
+  color: #c1121f;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.login-options a:hover {
+  text-decoration: underline;
+}
+
+.login-button {
+  background-color: #a10023;
+  color: white;
+  padding: 0.85rem 0;
+  border: none;
+  border-radius: 24px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s;
+  margin-top: 0.5rem;
+  width: 100%; /* Full width button */
+}
+
+.login-button:hover {
+  background-color: #c1121f;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .loginbg {
+    justify-content: center; /* Center horizontally on smaller screens */
+    padding: 1rem; /* Add padding to prevent edge clipping */
+  }
+
+  .login-container {
+    margin-left: 0; /* Remove left margin */
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .login-logo {
+    margin-left: 0;
+    margin-bottom: 1.5rem;
+    justify-content: center; /* Center logo */
+  }
+
+  .login-box {
+    margin-left: 0;
+    width: 90%;
+    max-width: 400px;
+    padding: 1.5rem;
+  }
+
+  .login-box h1 {
+    font-size: 1.8rem; /* Slightly smaller heading */
+  }
+
+  .login-box .subtitle {
+    font-size: 0.9rem; /* Smaller subtitle */
+  }
+
+  .form-group input {
+    font-size: 0.95rem; /* Adjust input font size */
+    padding: 0.65rem 2rem 0.65rem 2rem; /* Slightly smaller padding */
+  }
+
+  .login-button {
+    font-size: 1rem; /* Adjust button font size */
+    padding: 0.75rem 0;
+  }
+}
+
+@media (max-width: 480px) {
+  .login-box {
+    padding: 1.2rem;
+    width: 95%;
+  }
+
+  .login-logo img {
+    height: 24px; /* Smaller logo on very small screens */
+  }
+
+  .login-box h1 {
+    font-size: 1.5rem;
+  }
+
+  .login-box .subtitle {
+    font-size: 0.85rem;
+  }
+
+  .login-options {
+    flex-direction: column; /* Stack options vertically */
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+
+  .form-group .input-icon {
+    font-size: 1rem; /* Smaller icons */
+  }
+}

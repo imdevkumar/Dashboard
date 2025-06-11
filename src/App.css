@@ -129,3 +129,9 @@
   background-color: #f8f9fa;
   color: #28a745;
 }
+
+
+.bg-primary {
+  --bs-bg-opacity: 1;
+  background-color: rgb(38 38 39) !important;
+}

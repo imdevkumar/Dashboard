@@ -129,15 +129,14 @@ const LeftSidebar = () => {
         >
           
           <FloatingSelect
-            label="Priority"
+            label="Weights"
             name="priority"
             value={filters.priority}
             onChange={handleFilterChange}
             options={[
-              { value: '', label: 'All Priorities' },
-              { value: 'high', label: 'High' },
-              { value: 'medium', label: 'Medium' },
-              { value: 'low', label: 'Low' }
+              { value: '', label: 'Burger king' },
+              { value: 'high', label: 'Popeyes' },
+              
             ]}
           />
         </div>

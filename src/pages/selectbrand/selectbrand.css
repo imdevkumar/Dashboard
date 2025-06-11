@@ -1,0 +1,93 @@
+html, body {
+  margin: 0;
+  padding: 0;
+  overflow: hidden; /* Disable scrolling on the entire page */
+}
+
+.container-fluid {
+  padding: 0;
+}
+
+.image-section {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  background: linear-gradient(to right, #4A2C2A 50%, #F15A29 50%);
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.column {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 50%;
+  height: 100%;
+}
+
+.clickable {
+  cursor: pointer;
+  transition: box-shadow 0.2s, transform 0.2s;
+}
+
+.clickable:hover,
+.clickable:focus {
+ 
+}
+
+.logo {
+  width: 110px;
+  margin-bottom: 20px;
+}
+
+.logo1 {
+  width: 160px;
+  margin-bottom: 20px;
+}
+
+.burger {
+  width: 70%;
+  transition: transform 0.5s ease;
+}
+
+.burger1 {
+  width: 60%;
+  transition: transform 0.6s ease;
+}
+
+.burger:hover,
+.burger1:hover {
+  transform: scale(1.1);
+}
+
+/* Mobile view */
+@media (max-width: 768px) {
+  .image-section {
+    flex-direction: column; /* Stack columns vertically */
+    height: auto; /* Allow height to adjust */
+    min-height: 100vh; /* Ensure full viewport height */
+  }
+
+  .column {
+    width: 100%;
+    height: 50vh; /* Each column takes half the viewport height */
+    min-height: 300px; /* Minimum height for content */
+    margin-bottom: 20px; /* Space between stacked columns */
+  }
+
+  .logo {
+    width: 80px;
+  }
+
+  .logo1 {
+    width: 120px;
+  }
+
+  .burger,
+  .burger1 {
+    width: 90%;
+  }
+}

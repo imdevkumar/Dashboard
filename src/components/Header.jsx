@@ -1,12 +1,13 @@
 import React, { useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "@fortawesome/fontawesome-free/css/all.min.css";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const Header = () => {
   const [showDropdown, setShowDropdown] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const userEmail = "user@example.com";
+  const navigate = useNavigate();
 
   const navLinks = [
     { path: "/", label: "Overview", icon: "home" },
@@ -17,27 +18,32 @@ const Header = () => {
     { path: "/communication", label: "Communication" }
   ];
 
+  const handleLogout = () => {
+    localStorage.removeItem('isLoggedIn');
+    navigate('/login');
+  };
+
   return (
     <header
       className="d-flex align-items-center justify-content-between bg-white"
       style={{
-        borderBottom: "2px solid black",
-        padding: "10px 15px",
+      boxShadow: "0px 0px 10px 0px rgba(0, 0, 0, 0.1)",
+        padding: "0px 0px",
         position: "fixed",
         top: 0,
         left: 0,
         right: 0,
         zIndex: 1000,
-        height: "60px"
+       
       }}
     >
       {/* Left: Logo */}
-      <div className="d-flex align-items-center" style={{ width: '120px' }}>
+      <div className="d-flex align-items-center" style={{ width: '265px', backgroundColor: '#eaeaea', padding: '8px 16px', borderTopRightRadius: '40px' }}>
         <Link to="/" className="d-flex align-items-center">
           <img
-            src="/image 2.png"
+            src="/pvaluelogo.png"
             alt="Logo"
-            style={{ height: "25px", width: "auto" }}
+            style={{ width: "auto", height: "35px" }}
           />
         </Link>
       </div>
@@ -61,7 +67,8 @@ const Header = () => {
       </nav>
 
       {/* Right: User Profile and Mobile Menu */}
-      <div className="d-flex align-items-center gap-3">
+
+      <div className="d-flex align-items-center gap-3" style={{ width: '265px', backgroundColor: '#eaeaea', padding: '8px 25px', borderTopLeftRadius: '40px' }}>
         {/* User Profile - Hidden on mobile */}
         <div className="d-none d-md-flex align-items-center position-relative">
           <div 
@@ -90,7 +97,7 @@ const Header = () => {
                   <i className="fas fa-cog me-2"></i>
                   Settings
                 </div>
-                <div className="border-top pt-2">
+                <div className="border-top pt-2" onClick={handleLogout} style={{ cursor: 'pointer' }}>
                   <i className="fas fa-sign-out-alt me-2"></i>
                   Logout
                 </div>
@@ -152,7 +159,7 @@ const Header = () => {
                   <i className="fas fa-cog me-2"></i>
                   Settings
                 </button>
-                <button className="btn btn-outline-danger btn-sm">
+                <button className="btn btn-outline-danger btn-sm" onClick={handleLogout}>
                   <i className="fas fa-sign-out-alt me-2"></i>
                   Logout
                 </button>
