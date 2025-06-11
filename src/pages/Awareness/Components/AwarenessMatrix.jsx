@@ -19,13 +19,11 @@ const AwarenessMatrix = () => {
   }, []);
 
   return (
-    <div className="awareness-matrix-container" style={{backgroundColor: '#dbdbdb', padding: '20px'}}> 
-  <div className='d-flex justify-content-between align-items-center'>
-      <h4>Spontaneous Awareness (TOM)</h4>
-      <h4>Overall</h4>
-  </div>
-
-      <div className="d-flex flex-wrap justify-content-between align-items-stretch">
+    <div className="awareness-matrix-container" > 
+     <h4 className='text-center pb-2 border-bottom border-dark mb-3'>Overall</h4>
+   <div style={{backgroundColor: '#dbdbdb', padding: '20px'}}>
+    <h4>Spontaneous Awareness (TOM)</h4>
+    <div className="d-flex flex-wrap justify-content-between align-items-stretch">
         {/* Burger King Card */}
         <div className="awareness-card flex-fill">
           <div className="d-flex align-items-center mb-2">
@@ -72,6 +70,7 @@ const AwarenessMatrix = () => {
           </div>
         </div>
       </div>
+    </div>
     </div>
   );
 };

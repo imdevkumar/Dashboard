@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React from 'react';
+import Select, { components } from 'react-select';
 import './SubHeader.css';
 
 const brands = [
@@ -14,14 +15,43 @@ const kpis = [
   // Add more KPIs as needed
 ];
 
-const SubHeader = () => {
-  const [activeTab, setActiveTab] = useState('compare');
-  const [coreBrand, setCoreBrand] = useState(brands[0].value);
-  const [competitorBrand, setCompetitorBrand] = useState(brands[1].value);
-  const [selectedKpis, setSelectedKpis] = useState(['awareness', 'consideration']);
+const DropdownIndicator = (props) => (
+  <components.DropdownIndicator {...props}>
+    <span style={{ display: 'inline-block', width: 18, height: 18, background: 'none' }}>
+      <span
+        style={{
+          display: 'inline-block',
+          width: 18,
+          height: 18,
+          background: `url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23343a40' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m2 5 6 6 6-6'/%3e%3c/svg%3e") no-repeat center center`,
+          backgroundSize: '16px 16px',
+        }}
+      ></span>
+    </span>
+  </components.DropdownIndicator>
+);
 
-  // For KPI dropdown: show 'N Selected' as the only visible option
-  const kpiSelectedLabel = `${selectedKpis.length} Selected`;
+const ValueContainer = ({ children, ...props }) => {
+  const { getValue, selectProps } = props;
+  const selected = getValue();
+  const label = selected.length
+    ? `${selected.length} Selected`
+    : 'Select KPI';
+  return (
+    <components.ValueContainer {...props}>
+      {!selectProps.menuIsOpen ? (
+        <div style={{ color: '#222', fontWeight: 500 }}>
+          {label}
+        </div>
+      ) : children}
+    </components.ValueContainer>
+  );
+};
+
+const SubHeader = ({ activeTab, setActiveTab, onOpenSegment }) => {
+  const [coreBrand, setCoreBrand] = React.useState(brands[0].value);
+  const [competitorBrand, setCompetitorBrand] = React.useState(brands[1].value);
+  const [selectedKpis, setSelectedKpis] = React.useState([kpis[0], kpis[1]]);
 
   return (
     <div className="sub-header-container">
@@ -42,7 +72,7 @@ const SubHeader = () => {
           </button>
         </div>
         <div className="sub-header-segment-btn-wrapper ms-auto">
-          <button className="sub-header-segment-btn">Open Segment</button>
+          <button className="sub-header-segment-btn" onClick={typeof onOpenSegment === 'function' ? onOpenSegment : undefined}>Open Segment</button>
         </div>
       </div>
       {/* Row 2: All Filters Inline and Full Width */}
@@ -55,7 +85,7 @@ const SubHeader = () => {
               <option key={b.value} value={b.value}>{b.label}</option>
             ))}
           </select>
-          <span className="dropdown-chevron">▼</span>
+          <span className="dropdown-chevron"></span>
           <img
             src={brands.find(b => b.value === coreBrand)?.img}
             alt={brands.find(b => b.value === coreBrand)?.label}
@@ -70,27 +100,65 @@ const SubHeader = () => {
               <option key={b.value} value={b.value}>{b.label}</option>
             ))}
           </select>
-          <span className="dropdown-chevron">▼</span>
+          <span className="dropdown-chevron"></span>
           <img
             src={brands.find(b => b.value === competitorBrand)?.img}
             alt={brands.find(b => b.value === competitorBrand)?.label}
             className="dropdown-logo"
           />
         </div>
-        {/* KPI Dropdown */}
+        {/* KPI Dropdown with react-select */}
         <div className="sub-header-dropdown flex-grow-1 select-chevron-wrapper">
           <label>KPI</label>
-          <select
-            value={kpiSelectedLabel}
-            onChange={e => {
-              // This disables direct selection, but keeps the label visible
+          <Select
+            isMulti
+            closeMenuOnSelect={false}
+            hideSelectedOptions={false}
+            options={kpis}
+            value={selectedKpis}
+            onChange={setSelectedKpis}
+            classNamePrefix="kpi-select"
+            components={{ DropdownIndicator, ValueContainer }}
+            styles={{
+              control: (base) => ({
+                ...base,
+                minHeight: '38px',
+                borderRadius: '6px',
+                borderColor: '#bdbdbd',
+                boxShadow: 'none',
+                fontWeight: 500,
+                fontSize: '1rem',
+                paddingLeft: '0',
+                paddingRight: '0',
+              }),
+              valueContainer: (base) => ({
+                ...base,
+                padding: '0 8px',
+              }),
+              placeholder: (base) => ({
+                ...base,
+                color: '#222',
+                fontWeight: 500,
+              }),
+              multiValue: () => ({ display: 'none' }),
+              singleValue: (base) => ({
+                ...base,
+                color: '#222',
+                fontWeight: 500,
+              }),
+              dropdownIndicator: (base) => ({
+                ...base,
+                paddingRight: 8,
+                paddingLeft: 8,
+              }),
+              menu: (base) => ({
+                ...base,
+                zIndex: 9999,
+              }),
             }}
-            style={{ color: '#222', fontWeight: 500 }}
-            disabled
-          >
-            <option value={kpiSelectedLabel}>{kpiSelectedLabel}</option>
-          </select>
-          <span className="dropdown-chevron">▼</span>
+            getOptionLabel={option => option.label}
+            getOptionValue={option => option.value}
+          />
         </div>
       </div>
     </div>

@@ -20,7 +20,7 @@ function App() {
         <div className="main-content">
           <LeftSidebar />
           <div className="content-wrapper">
-          <SubHeader/>
+       
             <Routes>
               <Route path="/" element={<Overview />} />
               <Route path="/communication" element={<Communication />} />
