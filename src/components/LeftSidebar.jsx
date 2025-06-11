@@ -49,23 +49,29 @@ const LeftSidebar = () => {
   });
 
   const [markets, setMarkets] = useState([]);
+  const [brands, setBrands] = useState([]);
+  const [timePeriods, setTimePeriods] = useState([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const fetchMarkets = async () => {
+    const fetchData = async () => {
       try {
         const data = await getTabDetails('evhq5wczbiu', 'yegniuz2vsw');
-        if (data && data.markets) {
-          setMarkets(data.markets);
+        console.log('Complete API Response:', data);
+        
+        if (data) {
+          if (data.markets) setMarkets(data.markets);
+          if (data.brands) setBrands(data.brands);
+          if (data.dates) setTimePeriods(data.dates);
         }
       } catch (error) {
-        console.error('Error fetching markets:', error);
+        console.error('Error fetching data:', error);
       } finally {
         setLoading(false);
       }
     };
 
-    fetchMarkets();
+    fetchData();
   }, []);
 
   const handleFilterChange = (filterType, value) => {
@@ -148,16 +154,14 @@ const LeftSidebar = () => {
             zIndex: 1
           }}
         >
-          
           <FloatingSelect
             label="Weights"
             name="priority"
             value={filters.priority}
             onChange={handleFilterChange}
             options={[
-              { value: '', label: 'Burger king' },
-              { value: 'high', label: 'Popeyes' },
-              
+              { value: 'wts_1', label: 'Burger king' },
+              { value: 'wts_2', label: 'Popeyes' },
             ]}
           />
         </div>
@@ -173,7 +177,22 @@ const LeftSidebar = () => {
             paddingBottom: '20px'
           }}
         >
-          {/* All Dropdown Filters with Floating Labels */}
+          {/* Time Periods Dropdown */}
+          <FloatingSelect
+            label="Time Period"
+            name="dateRange"
+            value={filters.dateRange}
+            onChange={handleFilterChange}
+            options={[
+              { value: '', label: 'Select Time Period' },
+              ...timePeriods.map(period => ({
+                value: period.time_id.toString(),
+                label: period.time_label
+              }))
+            ]}
+          />
+
+          {/* Markets Dropdown */}
           <FloatingSelect
             label="Markets"
             name="product"
@@ -188,16 +207,18 @@ const LeftSidebar = () => {
             ]}
           />
 
+          {/* Brands Dropdown */}
           <FloatingSelect
-            label="Priority"
-            name="priority"
-            value={filters.priority}
+            label="Brands"
+            name="brand"
+            value={filters.brand}
             onChange={handleFilterChange}
             options={[
-              { value: '', label: 'All Priorities' },
-              { value: 'high', label: 'High' },
-              { value: 'medium', label: 'Medium' },
-              { value: 'low', label: 'Low' }
+              { value: '', label: 'Select Brand' },
+              ...brands.map(brand => ({
+                value: brand.brand_id.toString(),
+                label: brand.brand_label
+              }))
             ]}
           />
 
@@ -247,7 +268,6 @@ const LeftSidebar = () => {
           <button
             className="btn btn-outline-secondary flex-grow-1"
             onClick={handleReset}
-            // style={{fontSize:'15px'}}
           >
             Reset Filters
           </button>
